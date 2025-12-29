@@ -1,0 +1,29 @@
+{
+  "leads": [
+    {
+      "name": "王明",
+      "email": "wang.ming@techcorp.cn",
+      "company": "科技创新有限公司",
+      "position": "产品总监",
+      "industry": "企业SaaS",
+      "status": "pending"
+    },
+    {
+      "name": "李婷",
+      "email": "liting@ecommerce.com",
+      "company": "跨境优品电商",
+      "position": "运营VP",
+      "industry": "跨境电商",
+      "status": "pending"
+    },
+    {
+      "name": "张伟",
+      "email": "zhangwei@startup.io",
+      "company": "智能助手科技",
+      "position": "CEO",
+      "industry": "AI创业公司",
+      "status": "sent"
+    }
+  ],
+  "product_description": "我们是一款 AI 驱动的客户服务自动化平台，帮助企业降低 60% 的客服成本，同时提升客户满意度。已服务 500+ 企业客户。"
+}
