@@ -57,6 +57,7 @@ cp -r <skill-name> ~/.claude/skills/
 - "帮我分析这个竞品"
 - "生成一个LinkedIn帖子"
 - "检查这个网站的SEO"
+- 为来实现和n8n的工作节点相同,有些skill绕路远路,建议可以依据需要修改
 
 ## 依赖的 MCP 服务
 
