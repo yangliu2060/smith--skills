@@ -1,0 +1,242 @@
+#!/usr/bin/env bash
+# claude-review: Call Claude Code in headless mode to review an artifact.
+# Chains plan-eng-review for plan/architecture reviews.
+# Chains office-hours with --deep.
+#
+# Usage: claude-review <type> <file_or_dir> [--deep]
+#   type: plan | architecture | docs | work-log
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SKILL_DIR="$(dirname "$SCRIPT_DIR")"
+PROMPTS_FILE="$SKILL_DIR/references/review-prompts.md"
+
+usage() {
+  cat >&2 <<'EOF'
+Usage: claude-review <type> <file_or_dir> [--deep]
+
+Types:
+  plan          Review implementation plan (auto-chains plan-eng-review)
+  architecture  Review architecture/design doc (auto-chains plan-eng-review)
+  docs          Review user/API documentation (single pass)
+  work-log      Audit STATUS.md / errors.md for hidden failures (single pass)
+
+Flags:
+  --deep        Also chain office-hours skill (plan/architecture only)
+
+Output:
+  - Streamed to stdout
+  - Saved to .claude-review/<timestamp>-<type>.md in current working directory
+
+Examples:
+  claude-review plan ./docs/plan.md
+  claude-review architecture ./design.md --deep
+  claude-review docs ./README.md
+  claude-review work-log ./.codexfree/
+EOF
+}
+
+# --- Input validation ---
+
+if [ $# -lt 2 ]; then
+  usage
+  exit 1
+fi
+
+TYPE="$1"
+TARGET="$2"
+DEEP_FLAG="${3:-}"
+
+case "$TYPE" in
+  plan|architecture|docs|work-log) ;;
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  *)
+    echo "Error: invalid type '$TYPE'" >&2
+    usage
+    exit 1
+    ;;
+esac
+
+if [ ! -e "$TARGET" ]; then
+  echo "Error: target not found: $TARGET" >&2
+  exit 1
+fi
+
+if [ -n "$DEEP_FLAG" ] && [ "$DEEP_FLAG" != "--deep" ]; then
+  echo "Error: unknown flag '$DEEP_FLAG' (only --deep is supported)" >&2
+  exit 1
+fi
+
+if ! command -v claude >/dev/null 2>&1; then
+  echo "Error: 'claude' CLI not found. Install with: npm install -g @anthropic-ai/claude-code" >&2
+  exit 1
+fi
+
+if [ ! -f "$PROMPTS_FILE" ]; then
+  echo "Error: prompt file missing: $PROMPTS_FILE" >&2
+  exit 1
+fi
+
+# --- Resolve absolute target path (portable, no realpath dependency) ---
+
+if [ -d "$TARGET" ]; then
+  TARGET_ABS="$(cd "$TARGET" && pwd)"
+else
+  TARGET_DIR="$(cd "$(dirname "$TARGET")" && pwd)"
+  TARGET_ABS="$TARGET_DIR/$(basename "$TARGET")"
+fi
+
+# --- Decide skill chain ---
+
+CHAIN_PLAN_ENG="no"
+CHAIN_OFFICE_HOURS="no"
+case "$TYPE" in
+  plan|architecture)
+    CHAIN_PLAN_ENG="yes"
+    if [ "$DEEP_FLAG" = "--deep" ]; then
+      CHAIN_OFFICE_HOURS="yes"
+    fi
+    ;;
+  *)
+    if [ "$DEEP_FLAG" = "--deep" ]; then
+      echo "Warning: --deep has no effect for type '$TYPE' (only applies to plan/architecture)" >&2
+    fi
+    ;;
+esac
+
+# --- Output path ---
+
+TS="$(date -u +"%Y%m%dT%H%M%SZ")"
+OUT_DIR=".claude-review"
+mkdir -p "$OUT_DIR"
+OUT_FILE="$OUT_DIR/${TS}-${TYPE}.md"
+
+# --- Build chain instructions block (conditional) ---
+
+CHAIN_BLOCK=""
+if [ "$CHAIN_PLAN_ENG" = "yes" ]; then
+  CHAIN_BLOCK="${CHAIN_BLOCK}
+- MANDATORY: After your initial review, invoke the 'plan-eng-review' skill on the same target file. Pass through the headless-mode rule: plan-eng-review must NOT call AskUserQuestion; it must produce its final findings directly. Extract the essential findings and include them in your report under the heading '## Chained: plan-eng-review'. Do not copy the entire plan-eng-review preamble output — just the substantive findings."
+fi
+if [ "$CHAIN_OFFICE_HOURS" = "yes" ]; then
+  CHAIN_BLOCK="${CHAIN_BLOCK}
+- MANDATORY: After plan-eng-review completes, also invoke the 'office-hours' skill for extended architectural consultation on the same target. Same headless-mode rule — no interactive questions, produce final output. Include under '## Chained: office-hours'."
+fi
+if [ -z "$CHAIN_BLOCK" ]; then
+  CHAIN_BLOCK="
+- No skill chaining for this review type. Your initial review IS the final review."
+fi
+
+# --- Build output-format sections (conditional) ---
+
+CHAINED_SECTIONS=""
+if [ "$CHAIN_PLAN_ENG" = "yes" ]; then
+  CHAINED_SECTIONS="${CHAINED_SECTIONS}
+
+## Chained: plan-eng-review
+<condensed substantive findings from the plan-eng-review skill>"
+fi
+if [ "$CHAIN_OFFICE_HOURS" = "yes" ]; then
+  CHAINED_SECTIONS="${CHAINED_SECTIONS}
+
+## Chained: office-hours
+<condensed consultation output>"
+fi
+
+# --- Assemble prompt ---
+# Note: heredoc is unquoted so that $VAR expansion happens for the variables
+# we want. The only dynamic content in the review-prompts file is plain prose;
+# no unescaped $ or backticks in that file, so $(cat ...) is safe.
+
+CWD="$(pwd)"
+
+PROMPT=$(cat <<PROMPT_EOF
+You are Claude Code, invoked in HEADLESS MODE by Codex CLI to perform an artifact review.
+
+# Headless-mode rules (strict — violations break the pipeline)
+
+- DO NOT invoke AskUserQuestion. There is no interactive user.
+- Assume sensible defaults for every decision you would otherwise clarify.
+- Produce one complete final report in one pass. Your stdout IS the review.
+- Do not emit progress chatter, status updates, or meta-commentary outside the report. Just the report.
+
+# Review task
+
+- Type: $TYPE
+- Target: $TARGET_ABS
+- Current working directory: $CWD
+
+# Step 1 — Initial review
+
+Read the target. If it is a directory, list its contents and read the files that match this review type (e.g., for work-log: STATUS.md, errors.md, notes.md, CODEX_TASK.md; for architecture: design docs, diagrams; for plan: plan.md, tasks files; for docs: README.md, API docs).
+
+Apply the lens for type "$TYPE" from the reference below:
+
+---
+$(cat "$PROMPTS_FILE")
+---
+
+# Step 2 — Skill chaining
+$CHAIN_BLOCK
+
+# Step 3 — Produce final report
+
+Emit exactly this Markdown structure to stdout. Do not prepend or append anything outside it.
+
+# Review Report — $TYPE
+
+**Target:** $TARGET_ABS
+**Timestamp:** $TS
+**Deep mode:** $([ "$CHAIN_OFFICE_HOURS" = "yes" ] && echo "yes" || echo "no")
+
+## Executive Summary
+<one paragraph: overall verdict and headline issues>
+
+## Critical Issues (must fix before proceeding)
+<numbered list; write "None" if none>
+
+## High-Priority Findings (should fix soon)
+<numbered list; write "None" if none>
+
+## Suggestions (nice to have)
+<numbered list; write "None" if none>$CHAINED_SECTIONS
+
+## Decision
+<one line: approve | revise | block>
+<1-2 sentence rationale>
+
+# Decision taxonomy
+
+- approve — artifact is ready to proceed as-is
+- revise — issues found, fixable in place; Codex should fix and re-invoke
+- block — fundamental problem, not patchable; escalate to human
+
+Be specific. Cite file paths, line numbers, section headings, and exact quotes where relevant. Avoid vague findings like "consider improving error handling" — name the specific location and the specific fix.
+PROMPT_EOF
+)
+
+# --- Invoke Claude ---
+
+echo "→ claude-review: type=$TYPE target=$TARGET_ABS" >&2
+echo "→ Report will be saved to: $OUT_FILE" >&2
+[ "$CHAIN_PLAN_ENG" = "yes" ] && echo "→ Chaining: plan-eng-review" >&2
+[ "$CHAIN_OFFICE_HOURS" = "yes" ] && echo "→ Chaining: office-hours (--deep)" >&2
+echo "" >&2
+
+# Stream to stdout AND save to file. Preserve exit code of claude.
+set +e
+claude --print --permission-mode bypassPermissions "$PROMPT" | tee "$OUT_FILE"
+CLAUDE_EXIT=${PIPESTATUS[0]}
+set -e
+
+echo "" >&2
+if [ "$CLAUDE_EXIT" -eq 0 ]; then
+  echo "✓ Review complete. Report: $OUT_FILE" >&2
+else
+  echo "✗ Claude exited with code $CLAUDE_EXIT. Partial report (if any) at: $OUT_FILE" >&2
+fi
+exit "$CLAUDE_EXIT"
