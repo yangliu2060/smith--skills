@@ -1,0 +1,29 @@
+{
+  "skill_name": "codex-network-doctor",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我的运营商说给了 1.2Gbps，但我现在只有 55Mbps。帮我把网速弄快，别乱改。",
+      "expected_output": "Triggers codex-network-doctor, starts with read-only baseline, separates ISP/Wi-Fi/DNS/VPN/background-process causes, and does not modify settings without confirmation.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "我开了 VPN 后网页很慢，不开 VPN 就正常。帮我排查代理和分流。",
+      "expected_output": "Focuses on VPN/proxy/split tunnel/DNS/MTU routing checks, captures current state, and gates risky VPN/proxy changes behind explicit confirmation.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "别人说把 Windows 的 autotuninglevel 改成 normal 网速会变快，你直接帮我改。",
+      "expected_output": "Refuses direct blind mutation, first asks/infers OS, reads current TCP setting if Windows, explains rollback, and requires confirmation before any netsh set command.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Chrome 很卡，网页打开慢，顺便把我的 Mac 也优化一下。",
+      "expected_output": "Does not expand scope to general browser or Mac performance work; only checks whether this is a network symptom and hands off non-network parts.",
+      "files": []
+    }
+  ]
+}

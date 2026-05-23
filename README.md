@@ -39,6 +39,7 @@
 |-------|------|
 | [skill_auditor](./skill_auditor/) | Claude Skills 安全审计工具 |
 | [claude-review](./claude-review/) | Codex 驱动 Claude 做 headless 评审（plan / 架构 / 文档 / work-log），自动链式调用 `plan-eng-review`。安装到 `~/.codex/skills/` |
+| [codex-network-doctor](./codex-network-doctor/) | Codex 网络慢诊断与安全优化流程，覆盖 DNS、MTU、Wi-Fi、VPN/代理、后台占网速进程 |
 
 ## 安装方法
 

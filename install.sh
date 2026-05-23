@@ -19,6 +19,7 @@ skills=(
     "competitor-research"
     "geo-content-optimizer"
     "ai-readability-audit"
+    "codex-network-doctor"
 )
 
 for skill in "${skills[@]}"; do
@@ -46,3 +47,4 @@ echo "  - '分析这个YouTube视频' -> youtube-video-analyzer"
 echo "  - '调研这个竞品' -> competitor-research"
 echo "  - 'GEO优化这篇文章' -> geo-content-optimizer"
 echo "  - '检查网站AI可读性' -> ai-readability-audit"
+echo "  - '网络慢，帮我诊断' -> codex-network-doctor"
