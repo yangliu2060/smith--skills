@@ -2,17 +2,19 @@
 name: grok
 description: |
   Grok CLI 包装器 — 让 Claude 调本地 grok-build 获取 X (Twitter) 实时内容。
-  grok-build 与 X 同属 xAI 生态，对 X 公开帖文有原生 firehose 级实时访问，能拿到带
-  @用户名、点赞/浏览数、时间的真实帖子 —— 这是 Claude/Tavily/普通 web 搜索拿不到的实时数据。
-  复用用户已登录的 grok.com 订阅，调用零额外成本。
+  grok-build CLI 内部把 X 抓取工作流（Tavily / Firecrawl / Playwright / opencli 等工具 +
+  相关性排序 + 互动加权 + 营销噪音过滤 + 结构化输出）整合好了，开发者不用自己拼。
+  返回带 @用户名、点赞/浏览数、链接、时间的真实帖子。复用用户已登录的 grok.com 订阅，
+  调用零额外成本（不像 MCP 方案要 xAI API key 按 token 付费）。
   三模式：x（X 实时抓取，主力）、ask（把 Grok 当独立第二意见）、continue（续接追问）。
   Use this skill when the user wants REAL-TIME X/Twitter data, e.g.:
   问问 grok X 上在聊什么、让 grok 搜 X 上对某事的实时讨论、grok 看看 @某账号最近发了什么、
   X 上现在怎么说、X 实时热点、X 实时趋势、ask grok what X is saying about、
   grok 第二意见、consult grok。
   排除（不要触发本 skill）：写 X 推文 → 用 x-twitter-writer；非实时的历史 X 检索 →
-  用 x-sousuo；泛网络调研 → 用 smart-research。本 skill 的唯一差异点是 Grok 对 X 的实时
-  firehose 接入，没有"实时 X"诉求时不要用它。
+  用 x-sousuo；泛网络调研 → 用 smart-research。本 skill 的差异点是 grok 把 X 抓取工作流
+  调通了 + 复用订阅零成本，**不是**独家数据通道（grok 内部用的也是 web 工具）；
+  没有"实时 X 抓取"诉求时不要用它。
 allowed-tools:
   - Bash
   - Read
@@ -22,9 +24,13 @@ allowed-tools:
 
 # /grok — Claude 调用 Grok
 
-主战场是 **X (Twitter) 实时内容**。grok-build 与 X 同属 xAI，对 X 公开帖文有 firehose 级
-实时访问，能拿到带 @用户名、互动数据、时间的真实帖子，质量远超普通 web 搜索 API。
-次要场景：把 Grok 当独立第二意见用。复用 grok.com 订阅，零额外成本。
+主战场是 **X (Twitter) 实时内容**。grok-build CLI 内部用 Tavily / Firecrawl / Playwright /
+opencli 等工具实时抓 X，配上相关性排序、互动加权、营销噪音过滤、结构化输出 —— 整套工作
+流已经调好。对开发者来说 = 现成的 X 抓取专家，省去自己拼工具栈的事。次要场景：把 Grok
+当独立第二意见用。复用 grok.com 订阅，零额外成本（vs MCP 方案要 xAI API key 按 token 付）。
+
+> **诚实声明**：grok-build CLI 不是 xAI 内部 firehose API，它内部走的也是上面那些 web 工具。
+> 本 skill 的价值是"省事 + 省钱"，不是"独家数据通道"。
 
 所有调用逻辑（filesystem boundary、模式模板、超时、错误处理、临时文件清理）都收敛在
 `scripts/grok-call.sh` 一个脚本里。本 skill 只负责：识别模式 → 写 query 文件 → 调脚本 →

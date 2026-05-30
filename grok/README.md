@@ -1,18 +1,20 @@
 # grok-skill
 
-Let Claude Code call your local **Grok Build** CLI to pull **real-time X (Twitter) firehose** data —带 @用户名、点赞/浏览数、时间的真实帖子。复用你的 grok.com 订阅,零额外成本。
+Let Claude Code call your local **Grok Build** CLI for **real-time X (Twitter) data** — 带 @用户名、点赞/浏览数、链接、时间的真实帖子。grok-build CLI 内部把 X 抓取链(Tavily / Firecrawl / Playwright / opencli + 排序 + 营销过滤 + 结构化输出)调通了,你不用自己拼工具栈;加上复用你的 grok.com 订阅,零额外成本(不像 MCP 方案要 xAI API key)。
 
 ## Why this exists
 
-Claude / Tavily / generic web search 拿不到 X 的实时 firehose。Grok 与 X 同属 xAI 生态,对 X 公开帖文有**原生实时访问 + 互动加权排序**。这个 skill 把 grok-build CLI 包装成 Claude Code 的工作流入口,让 "X 上现在怎么说" 一句话变成结构化抓取 —— 而不是让 Claude 拿训练数据糊弄你。
+Claude 自己也能调 Tavily / WebSearch 搜 X,但抓 X 这事得拼对工具(普通 web search 给的是滞后索引)、配排序、过滤营销噪音、整理结构 —— 自己组装很烦。**grok-build CLI 内部已经把这套**(Tavily / Firecrawl / Playwright / opencli + 相关性排序 + 互动加权 + 营销过滤 + 结构化输出)**调好了**。这个 skill 把 grok-build 包装成 Claude Code 的工作流入口,让 "X 上现在怎么说" 一句话直接拿到结构化结果 —— 而不是让 Claude 自己拼工具或拿训练数据糊弄你。
+
+> **诚实声明**:grok-build CLI 用的也是 web 工具栈(每次调用 grok 自己会在末尾说出当次用了什么),不是 xAI 内部的 firehose API。本 skill 的真实价值是"**省事 + 省钱**",不是"**独家数据通道**"。
 
 替代方案对比:
 
-| 方案 | 成本 | X 实时性 | 启动延迟 |
+| 方案 | 成本 | X 抓取链 | 启动延迟 |
 |------|------|---------|----------|
-| **这个 skill(包装本地 grok)** | 0(复用 grok.com 订阅) | ✅ firehose | 30s-2min |
-| Grok MCP server(`grok-mcp` 等) | xAI API key 按 token 付费 | ✅ 同上 | <1s |
-| Tavily / Exa search | API key 付费 | ⚠️ 滞后第三方索引 | <1s |
+| **这个 skill(包装本地 grok)** | 0(复用 grok.com 订阅) | ✅ 现成,grok 已调好排序+过滤 | 30s-2min |
+| Grok MCP server(`grok-mcp` 等) | xAI API key 按 token 付费 | ✅ 类似(走 xAI API) | <1s |
+| Claude + Tavily / Exa 自己拼 | API key 付费 + 你的拼装时间 | ⚠️ 工具有,排序/过滤要自己写 | <1s |
 | Claude 训练数据 | 0 | ❌ 截止日期之前 | 0 |
 
 ## Real demo output
