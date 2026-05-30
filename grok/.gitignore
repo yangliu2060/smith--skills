@@ -1,0 +1,16 @@
+# Skill-creator workspace (sibling dir, but exclude in case dropped here)
+grok-workspace/
+
+# Eval runtime artifacts (the schema in evals/evals.json stays in git;
+# concrete run outputs do not)
+evals/results/
+evals/iteration-*/
+
+# OS / editor cruft
+.DS_Store
+*.swp
+*~
+
+# Temp prompt files if someone accidentally puts /tmp pattern here
+grok-prompt-*.txt
+grok-prompt-*.err

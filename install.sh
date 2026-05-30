@@ -19,6 +19,7 @@ skills=(
     "competitor-research"
     "geo-content-optimizer"
     "ai-readability-audit"
+    "grok"
 )
 
 for skill in "${skills[@]}"; do
@@ -46,3 +47,4 @@ echo "  - '分析这个YouTube视频' -> youtube-video-analyzer"
 echo "  - '调研这个竞品' -> competitor-research"
 echo "  - 'GEO优化这篇文章' -> geo-content-optimizer"
 echo "  - '检查网站AI可读性' -> ai-readability-audit"
+echo "  - '问问 grok / X 上...' -> grok（实时 X 抓取，需先装 grok-build CLI 并登录 grok.com）"

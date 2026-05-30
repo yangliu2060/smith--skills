@@ -39,6 +39,7 @@
 |-------|------|
 | [skill_auditor](./skill_auditor/) | Claude Skills 安全审计工具 |
 | [claude-review](./claude-review/) | Codex 驱动 Claude 做 headless 评审（plan / 架构 / 文档 / work-log），自动链式调用 `plan-eng-review`。安装到 `~/.codex/skills/` |
+| [grok](./grok/) | 让 Claude 调本地 Grok Build CLI 抓 X (Twitter) 实时 firehose 内容（带 @用户名/互动数/链接的真实帖子）。复用 grok.com 订阅零额外成本。三模式：x 实时抓取 / ask 第二意见 / continue 续接 |
 
 ## 安装方法
 
