@@ -1,18 +1,18 @@
 # grok-skill
 
-Let Claude Code call your local **Grok Build** CLI for **real-time X (Twitter) data** — 带 @用户名、点赞/浏览数、链接、时间的真实帖子。grok-build CLI 内部把 X 抓取链(Tavily / Firecrawl / Playwright / opencli + 排序 + 营销过滤 + 结构化输出)调通了,你不用自己拼工具栈;加上复用你的 grok.com 订阅,零额外成本(不像 MCP 方案要 xAI API key)。
+Let Claude Code call your local **Grok Build** CLI for **public X (Twitter) search and real-time discourse sampling**. X mode now explicitly asks Grok to prefer its native X tool family: `x_keyword_search`, `x_semantic_search`, `x_user_search`, and `x_thread_fetch`, with `web_search` / `open_page` for cross-checking. Outputs must include @用户名、post ID、链接、时间、互动数据、短原文摘录和限制说明。复用你的 grok.com 订阅,零额外成本(不像 MCP 方案要 xAI API key)。
 
 ## Why this exists
 
-Claude 自己也能调 Tavily / WebSearch 搜 X,但抓 X 这事得拼对工具(普通 web search 给的是滞后索引)、配排序、过滤营销噪音、整理结构 —— 自己组装很烦。**grok-build CLI 内部已经把这套**(Tavily / Firecrawl / Playwright / opencli + 相关性排序 + 互动加权 + 营销过滤 + 结构化输出)**调好了**。这个 skill 把 grok-build 包装成 Claude Code 的工作流入口,让 "X 上现在怎么说" 一句话直接拿到结构化结果 —— 而不是让 Claude 自己拼工具或拿训练数据糊弄你。
+Claude 自己也能调 Tavily / WebSearch 搜 X,但 X 任务真正需要的是可复核的公共话语采样: 精确关键词、账号限定、日期窗口、thread 上下文、互动数据和原文链接。这个 skill 把 grok-build 包装成 Claude Code 的工作流入口,让 "X 上现在怎么说" 变成一次带检索策略和证据字段的 Grok 调用,而不是让 Claude 自己拼工具或拿训练数据糊弄你。
 
-> **诚实声明**:grok-build CLI 用的也是 web 工具栈(每次调用 grok 自己会在末尾说出当次用了什么),不是 xAI 内部的 firehose API。本 skill 的真实价值是"**省事 + 省钱**",不是"**独家数据通道**"。
+> **诚实声明**: 这个 skill 通过 Grok CLI 发 prompt,不能像 xAI REST Responses API 那样在请求体里强制声明 `tools: [{ "type": "x_search" }]`。它能做的是把工具选择、证据字段和输出格式写进 prompt,让 Grok 在当前运行时暴露这些 X 工具时优先使用。它不是 firehose,也不能看 DM、私有账号、个人级点赞或书签。
 
 替代方案对比:
 
 | 方案 | 成本 | X 抓取链 | 启动延迟 |
 |------|------|---------|----------|
-| **这个 skill(包装本地 grok)** | 0(复用 grok.com 订阅) | ✅ 现成,grok 已调好排序+过滤 | 30s-2min |
+| **这个 skill(包装本地 grok)** | 0(复用 grok.com 订阅) | ✅ Prompt 强制优先用 Grok X 工具族并输出证据字段 | 30s-2min |
 | Grok MCP server(`grok-mcp` 等) | xAI API key 按 token 付费 | ✅ 类似(走 xAI API) | <1s |
 | Claude + Tavily / Exa 自己拼 | API key 付费 + 你的拼装时间 | ⚠️ 工具有,排序/过滤要自己写 | <1s |
 | Claude 训练数据 | 0 | ❌ 截止日期之前 | 0 |
@@ -28,7 +28,7 @@ Grok 通过本 skill 返回(部分):
 > 链接:`https://x.com/_catwu/status/2060054180379689074`
 > 核心:Anthropic 工程师官宣 Claude Code 动态工作流(dynamic workflows),支持数百并行 sub-agents,内部案例 <10 分钟并行处理数百 A/B test flags。
 
-带精确互动数 + 链接 + 时间 + 语义摘要 —— 这是普通 web 搜索 API 给不了的。
+带 post ID + 精确互动数 + 链接 + 时间 + 原文摘录 + 语义摘要,这是普通 web 搜索 API 给不了的。
 
 ## Requirements
 
@@ -80,7 +80,7 @@ cp -r smith--skills/grok ~/.claude/skills/
 
 | 场景 | 触发示例 | 模式 |
 |------|---------|------|
-| **X 实时抓取(主力)** | "问问 grok,X 上对 Opus 4.8 的真实反馈" | `x` |
+| **X 公共搜索 / 实时话语采样(主力)** | "问问 grok,X 上对 Opus 4.8 的真实反馈,给 post ID 和链接" | `x` |
 | **第二意见 / 通用问答** | "grok 第二意见:sqlite 做向量库后端靠谱吗" | `ask` |
 | **续接追问** | "继续问 grok,那换 duckdb 呢" | `continue` |
 
@@ -105,7 +105,9 @@ bash ~/.claude/skills/grok/scripts/grok-call.sh x /tmp/q.txt
 
 - 单次调用 30s-2min(grok 抓 X + 思考慢)
 - grok-build 模型固定,不支持 `--effort`(传了会报 400,脚本已不传)
-- X 精确互动数偶尔抓不全,grok 会退化用"传播广度"做 proxy 并说明
+- X 搜索是公共索引采样,不是全量 firehose
+- X 精确互动数可能缺字段,缺失时必须说明
+- X 数据不能单独当事实源;涉及事实判断时必须用网页来源交叉验证
 - 续接靠 grok `-c` 标志(最近 session),跨工作目录不保证命中
 
 ## How it was built

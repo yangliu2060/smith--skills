@@ -6,13 +6,38 @@
       "id": 1,
       "name": "x-mode-realtime-search",
       "prompt": "问问 grok，最近 24 小时 X 上关于 AI coding agent 的热门讨论有哪些",
-      "expected_output": "走 x 模式：Write 写 query 文件 → 调 grok-call.sh x。返回带 @用户名/大致时间/互动信号的真实 X 帖子，结构化（核心结论→Top帖子→其他观察），grok 原文原样转达不二次总结。",
+      "expected_output": "走 x 模式：Write 写 query 文件 → 调 grok-call.sh x。Prompt 明确要求优先使用 Grok X 工具族，返回带 @用户名/post ID/链接/时间/互动数据/短原文摘录/限制说明的真实 X 帖子证据，结构化（核心结论→检索策略→Top帖子证据→其他观察/噪音→限制与复核方式），grok 原文原样转达不二次总结。",
       "files": [],
       "assertions": [
         {"text": "用 grok-call.sh 的 x 模式调用（mode 参数为 x，非 ask/continue）", "kind": "manual"},
         {"text": "query 用 Write 工具落盘后再调脚本，未使用 shell heredoc 拼 prompt", "kind": "manual"},
-        {"text": "输出至少包含 3 个带 @ 用户名的 X 帖子引用", "kind": "manual"},
+        {"text": "Grok 输出检索策略，并明确出现 x_keyword_search、x_semantic_search、x_user_search、x_thread_fetch 中至少一个相关工具或等价工具说明", "kind": "manual"},
+        {"text": "输出至少包含 3 个带 @ 用户名、post ID、链接、时间、互动数据和短原文摘录的 X 帖子引用", "kind": "manual"},
         {"text": "grok 回复被原样转达（带 ━━━ 分隔），未被 Claude 改写或浓缩", "kind": "manual"}
+      ]
+    },
+    {
+      "id": 5,
+      "name": "x-mode-thread-fetch",
+      "prompt": "让 grok 抓这条 X thread 的上下文和高质量回复：https://x.com/xai/status/2061510464325206163",
+      "expected_output": "走 x 模式：调 grok-call.sh x。Prompt 应引导 Grok 优先用 x_thread_fetch 抓取给定 post/thread，并返回主帖、父帖或回复上下文、post ID、链接、时间、互动数据和复核方式。",
+      "files": [],
+      "assertions": [
+        {"text": "用 grok-call.sh 的 x 模式调用（mode 参数为 x）", "kind": "manual"},
+        {"text": "Grok 输出检索策略中说明 thread/post URL 场景优先用 x_thread_fetch 或等价 thread 抓取工具", "kind": "manual"},
+        {"text": "输出包含原 post ID、可打开链接、发布时间、互动数据和回复/上下文证据", "kind": "manual"}
+      ]
+    },
+    {
+      "id": 6,
+      "name": "x-mode-account-date-window",
+      "prompt": "用 grok 搜 @karpathy since:2026-06-01 之后关于 agents 的高互动帖子，给 post id 和链接",
+      "expected_output": "走 x 模式：调 grok-call.sh x。Prompt 应引导 Grok 用账号限定、日期窗口和互动信号做公共 X 搜索，并输出检索策略、post ID、链接、时间、互动数据、短原文摘录和限制说明。",
+      "files": [],
+      "assertions": [
+        {"text": "用 grok-call.sh 的 x 模式调用（mode 参数为 x）", "kind": "manual"},
+        {"text": "Grok 输出检索策略中保留 @karpathy、since:2026-06-01 或等价日期窗口", "kind": "manual"},
+        {"text": "输出包含 post ID、链接、发布时间、互动数据和短原文摘录", "kind": "manual"}
       ]
     },
     {
