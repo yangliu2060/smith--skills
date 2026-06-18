@@ -1,0 +1,20 @@
+{
+  "name": "storm-research-agent",
+  "version": "0.2.0",
+  "owner": "yangliu2060/smith--skills",
+  "updated_at": "2026-06-19",
+  "status": "active",
+  "maturity_tier": "production",
+  "lifecycle_stage": "production",
+  "context_budget_tier": "production",
+  "review_cadence": "monthly",
+  "target_platforms": [
+    "openai",
+    "generic"
+  ],
+  "factory_components": [
+    "references",
+    "evals",
+    "reports"
+  ]
+}

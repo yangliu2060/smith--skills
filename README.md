@@ -1,6 +1,6 @@
-# n8n 工作流转 Claude Code Skills
+# Smith Skills
 
-从 n8n 工作流模板转换而来的 14 个业务技能，可直接在 Claude Code 中使用。
+自用/精选的 Claude Code / Codex Skills 仓库，包含 n8n 工作流迁移、自研调研与内容工具、Grok X 实时抓取、Claude headless review 等。
 
 ## Skills 列表
 
@@ -21,6 +21,7 @@
 ### 市场调研
 | Skill | 描述 | 原始模板 |
 |-------|------|---------|
+| [storm-research-agent](./storm-research-agent/) | 中文优先的 STORM 多视角调研 Agent：证据包、矛盾地图、盲点分析、决策卡，支持中英文输出 | 自研 / Yao-style Production |
 | [social-trend-monitor](./social-trend-monitor/) | 社交趋势监控 | [#8450](https://n8n.io/workflows/8450) |
 | [influencer-evaluator](./influencer-evaluator/) | 网红评估 | [#7256](https://n8n.io/workflows/7256) |
 | [competitor-price-monitor](./competitor-price-monitor/) | 竞品价格监控 | [#8963](https://n8n.io/workflows/8963) |
@@ -43,10 +44,12 @@
 
 ## 安装方法
 
-### 方法一：一键安装所有 skills
+### 方法一：一键安装推荐 skills
 ```bash
 ./install.sh
 ```
+
+安装脚本只安装常用推荐列表，不等于仓库里的全部 skill。
 
 ### 方法二：手动安装单个 skill
 ```bash
@@ -59,6 +62,7 @@ cp -r <skill-name> ~/.claude/skills/
 - "帮我分析这个竞品"
 - "生成一个LinkedIn帖子"
 - "检查这个网站的SEO"
+- "用 STORM 调研这个选题是否值得写"
 - 为来实现和n8n的工作节点相同,有些skill绕路远路,建议可以依据需要修改
 
 ## 依赖的 MCP 服务

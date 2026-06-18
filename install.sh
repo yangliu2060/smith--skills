@@ -1,10 +1,10 @@
 #!/bin/bash
-# 将 n8n 转换的 Skills 安装到 Claude Code skills 目录
+# 将推荐 Skills 安装到 Claude Code skills 目录
 
 SKILLS_DIR="$HOME/.claude/skills"
 SOURCE_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-echo "📦 安装 n8n 转换的 Skills..."
+echo "📦 安装推荐 Skills..."
 echo "源目录: $SOURCE_DIR"
 echo "目标目录: $SKILLS_DIR"
 echo ""
@@ -14,6 +14,7 @@ mkdir -p "$SKILLS_DIR"
 
 # 要安装的 skills 列表
 skills=(
+    "storm-research-agent"
     "competitor-price-monitor"
     "youtube-video-analyzer"
     "competitor-research"
@@ -45,6 +46,7 @@ echo "使用方法:"
 echo "  - '监控竞品价格' -> competitor-price-monitor"
 echo "  - '分析这个YouTube视频' -> youtube-video-analyzer"
 echo "  - '调研这个竞品' -> competitor-research"
+echo "  - '用 STORM 调研这个选题是否值得写' -> storm-research-agent"
 echo "  - 'GEO优化这篇文章' -> geo-content-optimizer"
 echo "  - '检查网站AI可读性' -> ai-readability-audit"
 echo "  - '问问 grok / X 上...' -> grok（实时 X 抓取，需先装 grok-build CLI 并登录 grok.com）"

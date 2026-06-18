@@ -1,0 +1,22 @@
+interface:
+  display_name: "STORM 调研 Agent"
+  short_description: "中英双语多视角调研简报"
+  default_prompt: "Use $storm-research-agent to research this topic in Chinese first; if I ask for bilingual output, include both 中文版 and English version."
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "generic"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "remote"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "metadata-adapter"
+    generic: "neutral-source"

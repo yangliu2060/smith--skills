@@ -1,0 +1,56 @@
+{
+  "should_trigger": [
+    {
+      "text": "用 STORM 帮我调研这个 X 帖子值不值得写成长推，给我矛盾地图和决策卡。",
+      "family": "cn_storm_x_research"
+    },
+    {
+      "text": "先别写稿，帮我从五个视角研究这个选题，看看是否值得做。",
+      "family": "cn_prewrite_decision"
+    },
+    {
+      "text": "Use STORM research to analyze this product idea and produce a decision card.",
+      "family": "en_storm_decision"
+    },
+    {
+      "text": "做一个中英双语的多视角调研简报，重点标出 needs verification。",
+      "family": "bilingual_research_brief"
+    },
+    {
+      "text": "帮我找这个工具选题的盲点、反方观点、证据强弱和下一步最小实验。",
+      "family": "cn_blind_spot_analysis"
+    }
+  ],
+  "should_not_trigger": [
+    {
+      "text": "把这篇英文文章只翻译成中文，不要总结。",
+      "family": "translation_only"
+    },
+    {
+      "text": "直接帮我写一条长推引用这个帖子。",
+      "family": "final_longtweet"
+    },
+    {
+      "text": "把这篇 X Article 写成最终发布稿并进入发布暂存区。",
+      "family": "x_article_draft"
+    },
+    {
+      "text": "把这个内容写入飞书并发布。",
+      "family": "external_write_publish"
+    },
+    {
+      "text": "简单总结一下这个链接讲了什么。",
+      "family": "summary_only"
+    }
+  ],
+  "near_neighbor": [
+    {
+      "text": "先调研这个选题，然后再帮我写长推。",
+      "family": "research_then_writing"
+    },
+    {
+      "text": "把这个英文帖子的观点整理成中文，顺便判断能不能写。",
+      "family": "translation_plus_decision"
+    }
+  ]
+}

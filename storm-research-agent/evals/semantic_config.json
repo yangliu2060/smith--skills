@@ -1,0 +1,119 @@
+{
+  "recommended_threshold": 0.33,
+  "fallback_positive_concepts": [
+    "storm_research",
+    "multi_perspective",
+    "decision_card",
+    "evidence_brief"
+  ],
+  "positive_concepts": {
+    "storm_research": {
+      "weight": 0.32,
+      "phrases": [
+        "storm",
+        "STORM research",
+        "用 STORM",
+        "STORM 调研",
+        "先别写稿",
+        "调研 agent",
+        "research agent",
+        "research workflow",
+        "研究流程",
+        "研究这个选题",
+        "中英双语的多视角调研"
+      ]
+    },
+    "multi_perspective": {
+      "weight": 0.24,
+      "phrases": [
+        "multi perspective",
+        "multi-perspective",
+        "multiple perspectives",
+        "五视角",
+        "五个视角",
+        "多视角",
+        "矛盾地图",
+        "contradiction map",
+        "blind spot",
+        "盲点",
+        "反方观点"
+      ]
+    },
+    "decision_card": {
+      "weight": 0.22,
+      "phrases": [
+        "decision card",
+        "决策卡",
+        "判断值不值得",
+        "是否值得写",
+        "是否值得做",
+        "值得做",
+        "worth turning into content",
+        "continue validating",
+        "继续验证",
+        "下一步最小实验",
+        "最小实验"
+      ]
+    },
+    "evidence_brief": {
+      "weight": 0.22,
+      "phrases": [
+        "evidence-grounded",
+        "research brief",
+        "证据包",
+        "调研简报",
+        "证据强弱",
+        "confidence score",
+        "置信度",
+        "needs verification"
+      ]
+    }
+  },
+  "negative_concepts": {
+    "final_writing": {
+      "weight": 0.32,
+      "exclusive": true,
+      "phrases": [
+        "write a long post",
+        "写长推",
+        "写 X Article",
+        "draft the article",
+        "final social post",
+        "直接成稿"
+      ]
+    },
+    "publishing": {
+      "weight": 0.4,
+      "exclusive": true,
+      "phrases": [
+        "publish",
+        "post it",
+        "send it",
+        "发布",
+        "发出去",
+        "写入飞书",
+        "Feishu write"
+      ]
+    },
+    "translation_only": {
+      "weight": 0.26,
+      "exclusive": true,
+      "phrases": [
+        "translate only",
+        "只翻译",
+        "翻译一下",
+        "translate this article"
+      ]
+    },
+    "summary_only": {
+      "weight": 0.2,
+      "exclusive": false,
+      "phrases": [
+        "summarize",
+        "总结一下",
+        "摘要",
+        "brief summary"
+      ]
+    }
+  }
+}
