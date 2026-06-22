@@ -1,6 +1,6 @@
 ---
 name: video-creator
-description: "AI 短视频创作与多平台发布：生成脚本和视频，必要时使用即梦 MCP 与 Playwright MCP 辅助发布。"
+description: "AI 短视频创作：生成视频脚本、制作素材，并整理多平台发布流程。"
 ---
 
 # AI视频创作与多平台发布
