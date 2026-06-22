@@ -1,0 +1,21 @@
+{
+  "name": "loopforge",
+  "version": "0.1.0",
+  "owner": "local",
+  "updated_at": "2026-06-22",
+  "status": "draft",
+  "maturity_tier": "library",
+  "lifecycle_stage": "library",
+  "context_budget_tier": "production",
+  "review_cadence": "quarterly",
+  "target_platforms": [
+    "openai",
+    "claude",
+    "generic",
+    "agent-skills-compatible"
+  ],
+  "factory_components": [
+    "references",
+    "scripts"
+  ]
+}

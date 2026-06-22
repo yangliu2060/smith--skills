@@ -1,6 +1,6 @@
 # Smith Skills
 
-自用/精选的 Claude Code / Codex Skills 仓库，包含 n8n 工作流迁移、自研调研与内容工具、Grok X 实时抓取、Claude headless review 等。
+自用/精选的 Claude Code / Codex Skills 仓库，包含 n8n 工作流迁移、自研调研与内容工具、Agent workflow loop 设计、Grok X 实时抓取、Claude headless review 等。
 
 ## Skills 列表
 
@@ -39,6 +39,7 @@
 | Skill | 描述 |
 |-------|------|
 | [skill_auditor](./skill_auditor/) | Claude Skills 安全审计工具 |
+| [loopforge](./loopforge/) | 把模糊工作流锻造成可维护的 AI-agent workflow loop：同时输出 `loop-spec-v1` YAML/JSON 和可复制 Loop Prompt |
 | [claude-review](./claude-review/) | Codex 驱动 Claude 做 headless 评审（plan / 架构 / 文档 / work-log），自动链式调用 `plan-eng-review`。安装到 `~/.codex/skills/` |
 | [grok](./grok/) | 让 Claude 调本地 Grok Build CLI 抓 X (Twitter) 实时 firehose 内容（带 @用户名/互动数/链接的真实帖子）。复用 grok.com 订阅零额外成本。三模式：x 实时抓取 / ask 第二意见 / continue 续接 |
 
@@ -63,6 +64,7 @@ cp -r <skill-name> ~/.claude/skills/
 - "生成一个LinkedIn帖子"
 - "检查这个网站的SEO"
 - "用 STORM 调研这个选题是否值得写"
+- "用 loopforge 把这个工作流变成可复用 loop spec 和提示词"
 - 为来实现和n8n的工作节点相同,有些skill绕路远路,建议可以依据需要修改
 
 ## 依赖的 MCP 服务

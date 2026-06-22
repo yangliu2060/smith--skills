@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Loop Spec v1",
+  "type": "object",
+  "required": [
+    "spec_version",
+    "kind",
+    "status",
+    "name",
+    "purpose",
+    "use_when",
+    "do_not_use_when",
+    "inputs",
+    "authority",
+    "state",
+    "round",
+    "next_action_rule",
+    "working_signal",
+    "acceptance_gate",
+    "terminal_states",
+    "outputs",
+    "provenance"
+  ],
+  "properties": {
+    "spec_version": { "const": 1 },
+    "kind": { "const": "agent-workflow-loop" },
+    "status": { "enum": ["draft", "provisional", "tested", "published"] },
+    "round": {
+      "type": "object",
+      "required": ["observe", "choose", "act", "verify", "record"]
+    },
+    "terminal_states": {
+      "type": "object",
+      "required": ["success", "clean_noop", "blocked", "approval_required", "exhausted", "stagnated"]
+    }
+  }
+}
