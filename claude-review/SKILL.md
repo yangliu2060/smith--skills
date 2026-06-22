@@ -1,12 +1,12 @@
 ---
 name: claude-review
-description: "Delegate review tasks to Claude Code in headless mode — for plans, architecture docs, user docs, or work logs. Use this skill whenever you have a plan.md / design doc / README / STATUS.md that would benefit from an outside perspective before implementation or at a phase boundary. The skill calls Claude once in `--print` mode (one-shot, no interactive session), automatically chains Claude's `plan-eng-review` skill for plan/architecture targets, and returns a structured Markdown report. Built for Codex-driven workflows where Claude quota is precious and GPT quota is abundant — prefer this over spinning up a full Claude conversation."
+description: "把 plan、架构文档、用户文档或 work-log 交给 Claude Code 做无界面评审。适合在实现前或阶段边界获得外部视角；技能会单次调用 `claude --print`，对 plan/架构目标自动串联 `plan-eng-review`，并返回结构化 Markdown 报告。"
 argument-hint: "<plan|architecture|docs|work-log> <file_or_dir> [--deep]"
 ---
 
-# claude-review — Headless Claude Review
+# claude-review — Claude 无界面评审
 
-Get an independent review from Claude without burning tokens on a full Claude session. One `claude --print` call produces a structured report.
+用一次 `claude --print` 获得 Claude 的独立评审，不开启完整交互会话。
 
 ## When To Invoke
 

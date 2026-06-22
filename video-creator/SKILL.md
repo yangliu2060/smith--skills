@@ -1,6 +1,6 @@
 ---
 name: video-creator
-description: AI短视频创作与多平台发布，使用即梦MCP生成视频，使用Playwright MCP自动发布到YouTube/TikTok/Instagram/Facebook/LinkedIn/Twitter等平台。
+description: "AI 短视频创作与多平台发布：生成脚本和视频，必要时使用即梦 MCP 与 Playwright MCP 辅助发布。"
 ---
 
 # AI视频创作与多平台发布

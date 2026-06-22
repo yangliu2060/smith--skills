@@ -1,6 +1,6 @@
 ---
 name: influencer-evaluator
-description: 评估 Instagram/YouTube/TikTok 网红的账号数据，计算综合评分，帮助品牌筛选合适的KOL合作对象。
+description: "网红评估：分析 Instagram、YouTube、TikTok 等公开账号数据，计算综合评分，辅助品牌筛选 KOL 合作对象。"
 ---
 
 # 网红评估助手

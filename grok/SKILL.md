@@ -1,13 +1,13 @@
 ---
 name: grok
 description: |
-  Grok CLI 包装器 — 让 Claude 调本地 grok-build 获取 X (Twitter) 实时内容。
+  Grok CLI 包装器：让 Claude 调用本地 grok-build 获取 X (Twitter) 实时内容。
   X 模式必须优先驱动 Grok 原生 X 工具族：x_keyword_search、x_semantic_search、
   x_user_search、x_thread_fetch；必要时再用 web_search/open_page 交叉验证。
   返回带 @用户名、点赞/浏览数、链接、时间的真实帖子。复用用户已登录的 grok.com 订阅，
   调用零额外成本（不像 MCP 方案要 xAI API key 按 token 付费）。
-  三模式：x（X 实时抓取，主力）、ask（把 Grok 当独立第二意见）、continue（续接追问）。
-  Use this skill when the user wants REAL-TIME X/Twitter data, e.g.:
+  三种模式：x（X 实时抓取，主力）、ask（把 Grok 当独立第二意见）、continue（续接追问）。
+  当用户需要真实 X/Twitter 实时数据时使用，例如：
   问问 grok X 上在聊什么、让 grok 搜 X 上对某事的实时讨论、grok 看看 @某账号最近发了什么、
   X 上现在怎么说、X 实时热点、X 实时趋势、ask grok what X is saying about、
   grok 第二意见、consult grok。

@@ -1,13 +1,13 @@
 ---
 name: storm-research-agent
-description: Chinese-first STORM-style research and decision-support skill for validating topics, ideas, X posts, articles, products, tools, or workflows before writing. Use when the user asks for STORM research, multi-perspective research, contradiction maps, blind-spot analysis, evidence-grounded briefs, bilingual Chinese/English research output, or a decision card about whether something is worth turning into content, a business action, or a project. Excludes final social-post writing, X Article drafting, publishing, Feishu writes, and generic translation-only requests.
+description: "中文优先的 STORM 风格调研与决策支持技能。用于在写作前验证选题、想法、X 帖、文章、产品、工具或工作流，输出多视角研究、矛盾地图、盲点分析、证据简报和是否值得推进的决策卡。"
 ---
 
 # storm-research-agent
 
 ## Boundary
 
-Use this skill for research and decision support before writing. Do not write final posts, create X drafts, write to Feishu, create publish staging, send messages, or publish unless the user explicitly asks.
+这个技能只做写作前的调研和决策支持。除非用户明确要求，不写最终帖子、不创建 X 草稿、不写飞书、不创建发布暂存、不发送消息、不发布。
 
 When the current project has a `03_analysis/` directory, save research output there. Otherwise, return the brief inline or use the path requested by the user. Stop before downstream writing or publishing skills.
 

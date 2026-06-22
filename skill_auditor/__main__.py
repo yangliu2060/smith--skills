@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Skill Auditor - Claude Skills 安全审计工具
+技能审计器 - Claude 技能安全审计工具
 
 使用方法:
     python3 -m skill_auditor [OPTIONS]
@@ -29,7 +29,7 @@ def parse_args() -> argparse.Namespace:
     """解析命令行参数"""
     parser = argparse.ArgumentParser(
         prog='skill-auditor',
-        description='Claude Skills 安全审计工具',
+        description='Claude 技能安全审计工具',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog='''
 示例:

@@ -1,6 +1,6 @@
 ---
 name: viral-post-creator
-description: AI生成病毒式社交媒体帖子，使用即梦MCP生成配图，使用Playwright MCP自动发布到Facebook/Instagram等平台。
+description: "病毒式社交帖子创作：生成高互动文案、配图方向和平台发布建议，必要时调用图片或浏览器工具。"
 ---
 
 # 病毒式帖子生成器

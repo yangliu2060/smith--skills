@@ -1,6 +1,6 @@
 ---
 name: linkedin-post-creator
-description: 基于品牌调性和内容主题，AI生成高质量LinkedIn帖子，支持多轮反馈优化，输出可直接发布的专业内容。
+description: "LinkedIn 帖子创作：基于品牌调性和内容主题生成专业帖子，支持多轮反馈优化，输出可发布内容。"
 ---
 
 # LinkedIn 帖子生成器

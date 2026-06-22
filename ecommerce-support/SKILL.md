@@ -1,6 +1,6 @@
 ---
 name: ecommerce-support
-description: AI电商客服助手，支持订单查询、商品推荐、工单处理，可使用Playwright MCP自动操作电商后台查询真实订单状态。
+description: "AI 电商客服助手：识别客户意图，处理订单查询、商品推荐、投诉与工单；必要时可用 Playwright MCP 查询后台状态。"
 ---
 
 # 电商客服助手

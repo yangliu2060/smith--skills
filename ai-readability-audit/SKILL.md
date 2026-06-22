@@ -1,6 +1,6 @@
 ---
 name: ai-readability-audit
-description: AI网站可读性审计，模拟AI爬虫视角检查网站结构，评估对LLM的友好程度，提供具体优化建议。
+description: "AI 网站可读性审计：模拟 AI 爬虫视角检查网站结构，评估对大模型的友好程度，并给出优化建议。"
 ---
 
 # AI 网站可读性审计

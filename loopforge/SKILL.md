@@ -1,6 +1,6 @@
 ---
 name: loopforge
-description: Compile, validate, repair, and package AI-agent workflow loop specs. Use to extract, forge, doctor, or package repeatable agent workflow loops, or distinguish loops from goals, SOPs, checklists, cron jobs, one-shot tasks, and systems-thinking feedback loops. Do not use for official loop search, direct execution, or pure /goal commands.
+description: "创建、校验、修复和打包 AI Agent 工作流循环规范。用于提炼可重复运行的 loop，区分 loop 与 goal、SOP、清单、定时任务、一次性任务和系统反馈循环；不用于官方 loop 搜索、直接执行或纯 /goal 命令。"
 metadata:
   lifecycle_stage: library
   context_budget_tier: production
@@ -9,7 +9,7 @@ metadata:
 
 # Loopforge
 
-Turn fuzzy workflows into reusable AI-agent workflow loop specs.
+把模糊工作流锻造成可复用的 AI Agent 工作流循环规范。
 
 ## Route
 

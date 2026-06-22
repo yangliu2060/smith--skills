@@ -1,6 +1,6 @@
 ---
 name: z-image
-description: ModelScope Z-Image-Turbo text-to-image generation with 24+ visual style presets, auto style detection, and CLI support
+description: "ModelScope Z-Image-Turbo 文生图技能：支持多种视觉风格预设、自动风格识别和 CLI 调用。"
 license: MIT
 metadata:
   version: 1.0.0
