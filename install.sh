@@ -20,6 +20,7 @@ skills=(
     "competitor-research"
     "geo-content-optimizer"
     "ai-readability-audit"
+    "loopforge"
     "grok"
 )
 
@@ -49,4 +50,5 @@ echo "  - '调研这个竞品' -> competitor-research"
 echo "  - '用 STORM 调研这个选题是否值得写' -> storm-research-agent"
 echo "  - 'GEO优化这篇文章' -> geo-content-optimizer"
 echo "  - '检查网站AI可读性' -> ai-readability-audit"
+echo "  - '用 loopforge 把这个工作流变成 loop spec 和提示词' -> loopforge"
 echo "  - '问问 grok / X 上...' -> grok（实时 X 抓取，需先装 grok-build CLI 并登录 grok.com）"

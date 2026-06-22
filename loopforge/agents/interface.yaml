@@ -1,0 +1,24 @@
+interface:
+  display_name: "Loopforge"
+  short_description: "Compile, validate, repair, and package reusable AI-agent workflow loop specs."
+  default_prompt: "Use $loopforge to turn this workflow, prompt, transcript, or artifact into a reusable loop spec. Distinguish it from a goal, SOP, checklist, cron job, one-shot task, or systems-thinking feedback loop. For YAML/JSON specs, also include a copy-ready Loop Prompt unless I ask for machine-only output. Lint specs before marking ready."
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "creates and repairs loop-spec-v1 workflow specs from available task context"
+    claude: "uses the same loop boundaries and spec fields with Claude-compatible prose"
+    generic: "uses the canonical loop template and asks for missing high-impact criteria"

@@ -1,5 +1,7 @@
 # n8n 工作流与 Claude Code Skill 对比检查报告
 
+> 历史报告：本文只覆盖最早一批 n8n 工作流转换 skill，不覆盖后续加入的自研工具类 skill，例如 `storm-research-agent`、`grok`、`claude-review`、`loopforge`。
+
 **检查时间**: 2025-12-29
 **检查人**: Claude Code
 **检查范围**: 14个转换后的技能
