@@ -1,6 +1,6 @@
 ---
 name: seo-analyzer
-description: "SEO 分析：检查页面结构、技术指标和内容质量，生成可执行的搜索优化建议。"
+description: "SEO 分析：检查网站结构、技术指标和内容质量，输出搜索优化建议。"
 ---
 
 # SEO 分析助手
