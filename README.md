@@ -1,39 +1,39 @@
 # Smith Skills
 
-自用/精选的 Claude Code / Codex Skills 仓库，包含 n8n 工作流迁移、自研调研与内容工具、Agent workflow loop 设计、Grok X 实时抓取、Claude headless review 等。
+自用/精选的 Claude Code / Codex Skills 仓库，覆盖内容创作、客户服务、市场调研、SEO 优化、Agent workflow loop 设计、Grok X 实时抓取、Claude headless review 等场景。
 
 ## Skills 列表
 
 ### 营销与内容创作
-| Skill | 描述 | 原始模板 |
-|-------|------|---------|
-| [video-creator](./video-creator/) | AI视频创作（jimeng MCP + Playwright） | [#10358](https://n8n.io/workflows/10358) |
-| [viral-post-creator](./viral-post-creator/) | 病毒式社交帖子生成器 | [#8756](https://n8n.io/workflows/8756) |
-| [linkedin-post-creator](./linkedin-post-creator/) | LinkedIn帖子创作 | [#6979](https://n8n.io/workflows/6979) |
-| [cold-email-personalizer](./cold-email-personalizer/) | 冷邮件个性化 | [#6089](https://n8n.io/workflows/6089) |
+| Skill | 描述 |
+|-------|------|
+| [video-creator](./video-creator/) | AI 视频创作：生成脚本、调用视频/浏览器工具、整理发布报告 |
+| [viral-post-creator](./viral-post-creator/) | 病毒式社交帖子生成：从主题生成文案、配图方向和平台发布建议 |
+| [linkedin-post-creator](./linkedin-post-creator/) | LinkedIn 帖子创作：围绕品牌背景、主题和反馈循环打磨职业化内容 |
+| [cold-email-personalizer](./cold-email-personalizer/) | 冷邮件个性化：读取线索数据，生成结构化、可批量处理的个性化邮件 |
 
 ### 客户服务
-| Skill | 描述 | 原始模板 |
-|-------|------|---------|
-| [email-assistant](./email-assistant/) | 智能邮件助手（支持RAG知识库） | [#2852](https://n8n.io/workflows/2852) |
-| [ecommerce-support](./ecommerce-support/) | 电商客服（Playwright自动化） | [#3480](https://n8n.io/workflows/3480) |
+| Skill | 描述 |
+|-------|------|
+| [email-assistant](./email-assistant/) | 智能邮件助手：摘要、分类、知识库查询、回复草稿和审核 |
+| [ecommerce-support](./ecommerce-support/) | 电商客服：识别意图，处理订单查询、推荐、投诉和工单创建 |
 
 ### 市场调研
-| Skill | 描述 | 原始模板 |
-|-------|------|---------|
-| [storm-research-agent](./storm-research-agent/) | 中文优先的 STORM 多视角调研 Agent：证据包、矛盾地图、盲点分析、决策卡，支持中英文输出 | 自研 / Yao-style Production |
-| [social-trend-monitor](./social-trend-monitor/) | 社交趋势监控 | [#8450](https://n8n.io/workflows/8450) |
-| [influencer-evaluator](./influencer-evaluator/) | 网红评估 | [#7256](https://n8n.io/workflows/7256) |
-| [competitor-price-monitor](./competitor-price-monitor/) | 竞品价格监控 | [#8963](https://n8n.io/workflows/8963) |
-| [competitor-research](./competitor-research/) | 竞品全网调研 | [#2354](https://n8n.io/workflows/2354) |
+| Skill | 描述 |
+|-------|------|
+| [storm-research-agent](./storm-research-agent/) | 中文优先的 STORM 多视角调研：证据包、矛盾地图、盲点分析和决策卡 |
+| [social-trend-monitor](./social-trend-monitor/) | 社交趋势监控：发现多平台趋势、排序热度并生成趋势报告 |
+| [influencer-evaluator](./influencer-evaluator/) | 网红评估：解析公开账号数据，输出评分、等级和合作建议 |
+| [competitor-price-monitor](./competitor-price-monitor/) | 竞品价格监控：跟踪竞品价格变化、促销信号和异常波动 |
+| [competitor-research](./competitor-research/) | 竞品全网调研：收集竞品公开信息，输出定位、卖点、渠道和机会判断 |
 
 ### SEO与内容优化
-| Skill | 描述 | 原始模板 |
-|-------|------|---------|
-| [seo-analyzer](./seo-analyzer/) | SEO分析助手 | [#5303](https://n8n.io/workflows/5303) |
-| [geo-content-optimizer](./geo-content-optimizer/) | GEO内容优化（AI搜索友好） | [#8768](https://n8n.io/workflows/8768) |
-| [ai-readability-audit](./ai-readability-audit/) | AI可读性审计 | [#4151](https://n8n.io/workflows/4151) |
-| [youtube-video-analyzer](./youtube-video-analyzer/) | YouTube视频分析 | [#2679](https://n8n.io/workflows/2679) |
+| Skill | 描述 |
+|-------|------|
+| [seo-analyzer](./seo-analyzer/) | SEO 分析：检查页面结构、技术指标、内容质量和优化建议 |
+| [geo-content-optimizer](./geo-content-optimizer/) | GEO 内容优化：让内容更适合 AI 搜索、引用和答案生成 |
+| [ai-readability-audit](./ai-readability-audit/) | AI 可读性审计：检查内容是否易被 AI 抽取、理解和引用 |
+| [youtube-video-analyzer](./youtube-video-analyzer/) | YouTube 视频分析：提取字幕/信息，生成摘要、结构和可复用洞察 |
 
 ### 工具
 | Skill | 描述 |
@@ -65,7 +65,6 @@ cp -r <skill-name> ~/.claude/skills/
 - "检查这个网站的SEO"
 - "用 STORM 调研这个选题是否值得写"
 - "用 loopforge 把这个工作流变成可复用 loop spec 和提示词"
-- 为来实现和n8n的工作节点相同,有些skill绕路远路,建议可以依据需要修改
 
 ## 依赖的 MCP 服务
 
