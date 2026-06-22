@@ -1,6 +1,6 @@
 ---
 name: geo-content-optimizer
-description: "GEO 内容优化：面向 ChatGPT、Claude 等大模型优化内容结构，让文章更容易被 AI 搜索、引用和生成答案。"
+description: "GEO 内容优化：调整文章结构，让内容更容易被 AI 搜索引用。"
 ---
 
 # GEO 内容优化器
