@@ -1,6 +1,6 @@
 ---
 name: storm-research-agent
-description: "中文优先的 STORM 风格调研与决策支持技能。用于在写作前验证选题、想法、X 帖、文章、产品、工具或工作流，输出多视角研究、矛盾地图、盲点分析、证据简报和是否值得推进的决策卡。"
+description: "STORM 调研助手：用多视角证据分析选题、产品、工具或工作流是否值得推进。"
 ---
 
 # storm-research-agent
