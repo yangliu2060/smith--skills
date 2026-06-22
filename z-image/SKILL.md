@@ -1,6 +1,6 @@
 ---
 name: z-image
-description: "ModelScope Z-Image-Turbo 文生图技能：支持多种视觉风格预设、自动风格识别和 CLI 调用。"
+description: "Z-Image 文生图：调用 ModelScope Z-Image-Turbo 生成多风格图片。"
 license: MIT
 metadata:
   version: 1.0.0
