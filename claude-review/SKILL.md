@@ -1,6 +1,6 @@
 ---
 name: claude-review
-description: "把 plan、架构文档、用户文档或 work-log 交给 Claude Code 做无界面评审。适合在实现前或阶段边界获得外部视角；技能会单次调用 `claude --print`，对 plan/架构目标自动串联 `plan-eng-review`，并返回结构化 Markdown 报告。"
+description: "Claude 无界面评审：用一次 `claude --print` 审查 plan、架构文档、用户文档或 work-log，并返回结构化报告。"
 argument-hint: "<plan|architecture|docs|work-log> <file_or_dir> [--deep]"
 ---
 
