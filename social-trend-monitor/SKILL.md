@@ -1,6 +1,6 @@
 ---
 name: social-trend-monitor
-description: "社交趋势监控：追踪 Reddit、Instagram、TikTok 等平台热点，汇总跨平台趋势报告，发现内容灵感和市场机会。"
+description: "社交趋势监控：追踪多平台热点，生成趋势报告和内容机会判断。"
 ---
 
 # 社交媒体趋势监控
