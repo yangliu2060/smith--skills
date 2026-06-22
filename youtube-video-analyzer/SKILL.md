@@ -1,6 +1,6 @@
 ---
 name: youtube-video-analyzer
-description: "YouTube 视频分析：提取字幕或转录文本，生成结构化摘要、核心观点和关键概念。"
+description: "YouTube 视频分析：提取字幕或转录文本，输出摘要、观点和关键概念。"
 ---
 
 # YouTube 视频情报挖掘
