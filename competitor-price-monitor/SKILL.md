@@ -1,6 +1,6 @@
 ---
 name: competitor-price-monitor
-description: "竞品价格监控：批量跟踪竞品定价页面，对比历史价格，发现变化后输出提醒报告。"
+description: "竞品价格监控：跟踪竞品定价页面，对比历史价格，并报告变化。"
 ---
 
 # 竞品价格监控雷达
