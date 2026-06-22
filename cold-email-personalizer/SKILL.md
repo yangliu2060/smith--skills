@@ -1,6 +1,6 @@
 ---
 name: cold-email-personalizer
-description: "冷邮件个性化：读取潜在客户信息，生成定制主题行和邮件正文，提升打开率与回复率。"
+description: "冷邮件个性化：根据潜在客户信息生成定制主题行和邮件正文。"
 ---
 
 # 冷邮件个性化群发
